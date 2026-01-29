@@ -14,7 +14,7 @@ function onOpen() {
   let menu = ui.createMenu("Scripts");
 
   let text = ui.createMenu("Text");
-  text.addItem("Text trim", "textTrim").addItem("Text in", "textIn").addItem("Link domain", "formatLinks");
+  text.addItem("Text trim", "textTrim").addItem("Text in", "textIn");
 
   let link = ui.createMenu("Link");
   link.addItem("Domain", "linkFormat");
@@ -31,6 +31,7 @@ function onOpen() {
     .addItem("Update range", "updateRange")
     .addItem("Reset range", "resetRange")
     .addItem("Change orientation", "changeOrientation")
+    .addItem("Parse CSV", "csv")
     .addSubMenu(text)
     .addSubMenu(link)
     .addSubMenu(insert)

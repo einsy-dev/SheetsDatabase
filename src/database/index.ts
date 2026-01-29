@@ -1,8 +1,8 @@
 import { _active, _activeValues, _sitesValues } from "../config";
+import { parseCSV } from "./parseCSV";
 import { Values } from "./values";
 
 export function refresh() {
-  if (_active.getName().includes("_")) return;
   if (!_sitesValues) {
     console.error("_sitesValues is null");
     return;
@@ -48,6 +48,14 @@ export function updateRange() {
   }
   const data = new Values({ range, keyRow: 2, keyCol: 1 });
   _sitesValues.update(data, { create: true, preserve: true });
+}
+
+export function csv() {
+  let range = _active.getActiveRange();
+  if (!range) return;
+  let newValues = parseCSV(range.getValues());
+  let newRange = _active.getRange(range.getRow(), range.getColumn(), newValues.length, newValues[0].length);
+  newRange.setValues(newValues);
 }
 
 export function editTrigger({ range }: GoogleAppsScript.Events.SheetsOnEdit) {
