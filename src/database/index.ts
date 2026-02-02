@@ -47,6 +47,17 @@ export function updateRange() {
     return;
   }
   const data = new Values({ range, keyRow: 2, keyCol: 1 });
+  _sitesValues.update(data, { create: true });
+}
+
+export function updatePreserveRange() {
+  let range = _active.getActiveRange();
+  if (!range) return;
+  if (!_sitesValues) {
+    console.error("_sitesValues is null");
+    return;
+  }
+  const data = new Values({ range, keyRow: 2, keyCol: 1 });
   _sitesValues.update(data, { create: true, preserve: true });
 }
 

@@ -28,7 +28,8 @@ function onOpen() {
   menu
     .addItem("Refresh", "refresh")
     .addItem("Refresh range", "refreshRange")
-    .addItem("Update range", "updateRange")
+    .addItem("Update range", "updatePreserveRange")
+    .addItem("Overwrite range", "updateRange")
     .addItem("Reset range", "resetRange")
     .addItem("Change orientation", "changeOrientation")
     .addItem("Parse CSV", "csv")
