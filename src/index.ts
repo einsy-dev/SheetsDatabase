@@ -7,14 +7,16 @@ import { linkFormat } from "./link/linkFormat";
 import { rotate } from "./rotate/rotate";
 import { textIn } from "./text/textIn";
 import { textTrim } from "./text/textTrim";
+import { removeImg } from "./text/removeImg";
 import { parseDomain } from "./utils/parseDomain";
 
 function onOpen() {
   let ui = SpreadsheetApp.getUi();
-  let menu = ui.createMenu("Scripts");
+  let scripts = ui.createMenu("Scripts");
+  let database = ui.createMenu("Database");
 
   let text = ui.createMenu("Text");
-  text.addItem("Text trim", "textTrim").addItem("Text in", "textIn");
+  text.addItem("Text trim", "textTrim").addItem("Text in", "textIn").addItem("Remove <img ... >", "removeImg");
 
   let link = ui.createMenu("Link");
   link.addItem("Domain", "linkFormat");
@@ -25,18 +27,21 @@ function onOpen() {
   let insert = ui.createMenu("Insert");
   insert.addItem("Insert columns", "insertColumns").addItem("Insert rows", "insertRows");
 
-  menu
-    .addItem("Refresh", "refresh")
-    .addItem("Refresh range", "refreshRange")
-    .addItem("Update range", "updatePreserveRange")
-    .addItem("Overwrite range", "updateRange")
-    .addItem("Reset range", "resetRange")
+  scripts
     .addItem("Change orientation", "changeOrientation")
     .addItem("Parse CSV", "csv")
     .addSubMenu(text)
     .addSubMenu(link)
     .addSubMenu(insert)
     .addSubMenu(filter)
+    .addToUi();
+
+  database
+    .addItem("Refresh", "refreshRange")
+    .addItem("Refresh all", "refresh")
+    .addItem("Save", "updatePreserveRange")
+    .addItem("Overwrite", "updateRange")
+    .addItem("Reset", "resetRange")
     .addToUi();
 
   if (!ScriptApp.getProjectTriggers().some((t) => t.getHandlerFunction() == "editTrigger")) {
@@ -50,6 +55,7 @@ function onOpen() {
   parseDomain,
   textIn,
   textTrim,
+  removeImg,
   linkFormat,
   rotate,
   insertColumns,

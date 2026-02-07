@@ -31,7 +31,7 @@ export class Values {
   }
 
   private _getCols({ keyRow }: { keyRow: number }) {
-    let keys = this.sheet.getRange(keyRow, 1, 1, this.sheet.getLastColumn()).getValues()[0];
+    let keys = this.sheet.getRange(keyRow, 1, 1, this.range.getLastColumn()).getValues()[0];
     this.cols = keys.reduce(
       (acc, el, i) => {
         acc[el] = i;

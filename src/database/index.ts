@@ -1,6 +1,41 @@
-import { _active, _activeValues, _sitesValues } from "../config";
+import { _active, _sites } from "../config";
 import { parseCSV } from "./parseCSV";
 import { Values } from "./values";
+
+const _activeValues = _active
+  ? new Values({
+      range: _active.getRange(3, 1, _active.getLastRow() - 2, _active.getLastColumn()),
+      keyRow: 2,
+      keyCol: 1
+    })
+  : null;
+
+const _sitesValues = _sites
+  ? new Values({
+      range: _sites.getRange(3, 1, _sites.getLastRow() - 2, _sites.getLastColumn()),
+      keyRow: 2,
+      keyCol: 1
+    })
+  : null;
+
+export function editTrigger({ range }: GoogleAppsScript.Events.SheetsOnEdit) {
+  if (range.getSheet().getName().includes("_")) return;
+  if (range.getRow() <= 2) {
+    // skip key row
+    console.log("Out of trigger range");
+    return;
+  }
+  if (!_sitesValues) {
+    console.error("_sitesValues is null");
+    return;
+  }
+  if (!_activeValues) return;
+
+  if (range.getColumn() !== 1) {
+    _sitesValues.update(_activeValues, { create: true, preserve: true });
+  }
+  refresh();
+}
 
 export function refresh() {
   if (!_sitesValues) {
@@ -67,24 +102,4 @@ export function csv() {
   let newValues = parseCSV(range.getValues());
   let newRange = _active.getRange(range.getRow(), range.getColumn(), newValues.length, newValues[0].length);
   newRange.setValues(newValues);
-}
-
-export function editTrigger({ range }: GoogleAppsScript.Events.SheetsOnEdit) {
-  if (range.getSheet().getName().includes("_")) return;
-  if (range.getRow() <= 2) {
-    console.log("Out of trigger range");
-    return;
-  }
-  if (!_sitesValues) {
-    console.error("_sitesValues is null");
-    return;
-  }
-
-  const data = new Values({ range, keyRow: 2, keyCol: 1 });
-
-  if (range.getColumn() === 1) {
-    data.update(_sitesValues, { clear: true });
-  } else if (_activeValues) {
-    _sitesValues.update(_activeValues, { create: true, preserve: true });
-  }
 }
