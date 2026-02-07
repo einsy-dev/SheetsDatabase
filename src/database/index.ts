@@ -35,6 +35,8 @@ export function editTrigger({ range }: GoogleAppsScript.Events.SheetsOnEdit) {
     const edited = new Values({ range, keyRow: 2, keyCol: 1 });
     _activeValues.update(edited, { preserve: true, keys: _sitesValues.cols });
     _sitesValues.update(_activeValues, { create: true, preserve: true });
+  } else {
+    refresh();
   }
 }
 
