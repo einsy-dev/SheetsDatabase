@@ -118,10 +118,15 @@ export class Values {
 
   update(
     values: Values,
-    { create = false, clear = false, preserve = false }: { create?: boolean; clear?: boolean; preserve?: boolean } = {}
+    {
+      create = false,
+      clear = false,
+      preserve = false,
+      keys = values.cols
+    }: { create?: boolean; clear?: boolean; preserve?: boolean; keys?: { [key: string]: number } } = {}
   ) {
     const sameKeys = Object.keys(this.cols)
-      .filter((key) => Object.prototype.hasOwnProperty.call(values.cols, key))
+      .filter((key) => Object.prototype.hasOwnProperty.call(keys, key))
       .reduce(
         (obj, key) => {
           obj[key] = this.cols[key];
