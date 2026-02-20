@@ -9,6 +9,7 @@ import { textIn } from "./text/textIn";
 import { textTrim } from "./text/textTrim";
 import { removeImg } from "./text/removeImg";
 import { parseDomain } from "./utils/parseDomain";
+import { textToNumber } from "./number/textToNumber";
 
 function onOpen() {
   let ui = SpreadsheetApp.getUi();
@@ -17,6 +18,9 @@ function onOpen() {
 
   let text = ui.createMenu("Text");
   text.addItem("Text trim", "textTrim").addItem("Text in", "textIn").addItem("Remove <img ... >", "removeImg");
+
+  let number = ui.createMenu("Number");
+  number.addItem("Text to number", "textToNumber");
 
   let link = ui.createMenu("Link");
   link.addItem("Domain", "linkFormat");
@@ -31,6 +35,7 @@ function onOpen() {
     .addItem("Change orientation", "changeOrientation")
     .addItem("Parse CSV", "csv")
     .addSubMenu(text)
+    .addSubMenu(number)
     .addSubMenu(link)
     .addSubMenu(insert)
     .addSubMenu(filter)
@@ -44,10 +49,10 @@ function onOpen() {
     .addItem("Reset", "resetRange")
     .addToUi();
 
-  if (!ScriptApp.getProjectTriggers().some((t) => t.getHandlerFunction() == "editTrigger")) {
-    ScriptApp.newTrigger("editTrigger").forSpreadsheet(SpreadsheetApp.getActiveSpreadsheet()).onEdit().create();
-    console.log("trigger added");
-  }
+  // if (!ScriptApp.getProjectTriggers().some((t) => t.getHandlerFunction() == "editTrigger")) {
+  //   ScriptApp.newTrigger("editTrigger").forSpreadsheet(SpreadsheetApp.getActiveSpreadsheet()).onEdit().create();
+  //   console.log("trigger added");
+  // }
 }
 
 (globalThis as any) = {
@@ -55,6 +60,7 @@ function onOpen() {
   parseDomain,
   textIn,
   textTrim,
+  textToNumber,
   removeImg,
   linkFormat,
   rotate,

@@ -46,6 +46,7 @@ export class Values {
       (acc, row: string[], i: number) => {
         let domain = parseDomain(row[keyCol - 1]);
         if (!domain) return acc;
+        this.values[i][keyCol - 1] = domain;
 
         if (acc[domain] === undefined) {
           acc[domain] = i;

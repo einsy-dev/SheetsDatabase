@@ -45,10 +45,8 @@ export function refresh() {
     console.error("_sitesValues is null");
     return;
   }
-
-  let range = _active.getRange(3, 1, _active.getLastRow(), 1);
-  const data = new Values({ range, keyRow: 2, keyCol: 1 });
-  data.update(_sitesValues, { preserve: true });
+  if (!_activeValues) return;
+  _activeValues.update(_sitesValues, { preserve: true });
 }
 
 export function refreshRange() {
