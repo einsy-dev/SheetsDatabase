@@ -10,6 +10,7 @@ import { textTrim } from "./text/textTrim";
 import { removeImg } from "./text/removeImg";
 import { parseDomain } from "./utils/parseDomain";
 import { textToNumber } from "./number/textToNumber";
+import { makeHeader } from "./sheet/makeHeader";
 
 function onOpen() {
   let ui = SpreadsheetApp.getUi();
@@ -34,6 +35,7 @@ function onOpen() {
   scripts
     .addItem("Change orientation", "changeOrientation")
     .addItem("Parse CSV", "csv")
+    .addItem("Make Header", "makeHeader")
     .addSubMenu(text)
     .addSubMenu(number)
     .addSubMenu(link)
@@ -68,5 +70,6 @@ function onOpen() {
   insertRows,
   filterRows,
   filterCols,
+  makeHeader,
   database
 };

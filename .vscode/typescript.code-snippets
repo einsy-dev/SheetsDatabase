@@ -8,5 +8,22 @@
     ],
     "description": "",
     "scope": "typescript, typescriptreact"
+  },
+  "updateObject": {
+    "prefix": [
+      "updateObject"
+    ],
+    "body": [
+      "export function updateObject(target: { [key: string]: any }, source: { [key: string]: any }): any {\r",
+      "  for (const key in target) {\r",
+      "    if (Object.prototype.hasOwnProperty.call(target, key) && Object.prototype.hasOwnProperty.call(source, key)) {\r",
+      "      target[key] = source[key];\r",
+      "    }\r",
+      "  }\r",
+      "  return target;\r",
+      "}"
+    ],
+    "description": "",
+    "scope": "typescript, typescriptreact"
   }
 }
