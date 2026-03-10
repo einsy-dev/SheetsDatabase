@@ -1,4 +1,4 @@
-import { _active } from "../config";
+import { _active } from "../../config";
 
 export function filterRows() {
   const activeRange = _active.getActiveRange();

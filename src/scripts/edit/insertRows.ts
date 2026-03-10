@@ -1,4 +1,4 @@
-import { _active } from "../config";
+import { _active } from "../../config";
 
 export function insertRows() {
   let row = _active.getActiveRange()?.getRow();

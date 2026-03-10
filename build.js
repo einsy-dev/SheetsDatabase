@@ -4,7 +4,7 @@ import { clean } from 'esbuild-plugin-clean';
 import * as fs from "fs";
 
 esbuild.build({
-	entryPoints: ['src/index.ts', 'src/functions/index.ts'],
+	entryPoints: ['src/index.ts'],
 	outdir: 'dist',
 	format: 'cjs',
 	target: 'es2019',

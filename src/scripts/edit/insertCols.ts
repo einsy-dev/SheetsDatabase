@@ -1,4 +1,4 @@
-import { _active } from "../config";
+import { _active } from "../../config";
 
 export function insertColumns() {
   let col = _active.getActiveRange()?.getColumn();

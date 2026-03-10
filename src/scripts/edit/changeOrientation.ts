@@ -1,6 +1,6 @@
-import { _active } from "../config";
+import { _active } from "../../config";
 
-export function rotate() {
+export function changeOrientation() {
   const range = _active.getActiveRange();
   if (!range) return;
   const selected: string[][] = range.getValues();
