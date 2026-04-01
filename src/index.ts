@@ -1,21 +1,21 @@
 import * as scripts from "./scripts";
-import { editMenu, filterMenu, formatMenu, htmlMenu, linkMenu } from "./scripts";
+import { scriptsMenu } from "./scripts";
+import * as database from "./database";
+import { databaseMenu } from "./database";
+import { clearToken } from "./config/auth";
 
 function onOpen() {
   let ui = SpreadsheetApp.getUi();
   let scripts = ui.createMenu("Scripts");
-  let seo = ui.createMenu("Seo");
+  let database = ui.createMenu("Database");
 
-  scripts
-    .addSubMenu(editMenu(ui))
-    .addSubMenu(filterMenu(ui))
-    .addSubMenu(formatMenu(ui))
-    .addSubMenu(htmlMenu(ui))
-    .addSubMenu(linkMenu(ui))
-    .addToUi();
+  scriptsMenu(scripts, ui).addToUi();
+  databaseMenu(database, ui).addToUi();
 }
 
 (globalThis as any) = {
   ...globalThis,
-  ...scripts
+  ...scripts,
+  ...database,
+  clearToken
 };

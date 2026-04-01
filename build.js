@@ -22,9 +22,4 @@ esbuild.build({
 			copyWithFolder: true
 		}),
 	],
-
-
-}).then(() => {
-	const file = fs.readFileSync("./dist/functions/index.js", "utf-8")
-	fs.writeFileSync("./dist/functions/index.js", file.replace("\n * @preserve", ""), "utf-8")
 }).catch(() => process.exit(1));

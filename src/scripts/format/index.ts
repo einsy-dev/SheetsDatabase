@@ -1,11 +1,14 @@
 export { textIn } from "./textIn";
 export { textTrim } from "./textTrim";
-export { textToNumber } from "./textToNumber";
+export { domain } from "./domain";
 
-export function formatMenu(ui: GoogleAppsScript.Base.Ui) {
-  return ui
+export function formatSubMenu(menu: GoogleAppsScript.Base.Menu, ui: GoogleAppsScript.Base.Ui) {
+  let subMneu = ui
     .createMenu("Format")
-    .addItem("textIn", "textIn")
-    .addItem("textTrim", "textTrim")
-    .addItem("textToNumber", "textToNumber");
+
+    .addItem(`Text in *t*`, "textIn")
+    .addItem("Trim", "textTrim")
+    .addItem("Domain", "domain");
+
+  menu.addSubMenu(subMneu);
 }

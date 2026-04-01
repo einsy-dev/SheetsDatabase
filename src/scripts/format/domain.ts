@@ -1,8 +1,7 @@
-import { _active } from "../../config";
 import { mapRange } from "../../utils/mapRange";
 import { parseDomain } from "../../utils/parseDomain";
 
-export function linkFormat() {
+export function domain() {
   mapRange((cell) => {
     return parseDomain(cell) || "";
   });
